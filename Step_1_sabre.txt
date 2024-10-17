@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH --partition=batch
+#SBATCH --nodes=1                # 1 computer nodes
+#SBATCH --ntasks-per-node=1      # 1 MPI tasks on EACH NODE
+#SBATCH --cpus-per-task=4        # 4 OpenMP threads on EACH MPI TASK
+#SBATCH --mem=440GB               # Request 440GB memory
+#SBATCH --time=3-00:00:00        # Time limit day-hrs:min:sec
+#SBATCH --mail-user=ddeconin@cityu.edu.hk  
+#SBATCH --mail-type=BEGIN,END,FAIL
+
+cd /gpfs1/home/ddeconin/Demultiplexed/
+
+/gpfs1/home/ddeconin/sabre/sabre-master/sabre pe -f /gpfs1/home/ddeconin/Raw_data/MB1_FKDN240215898-1A_HCGLTDSXC_L3_R1.fq.gz -r /gpfs1/home/ddeconin/Raw_data/MB1_FKDN240215898-1A_HCGLTDSXC_L3_R2.fq.gz -b /gpfs1/home/ddeconin/MB1_barcodes.txt -u MB1_unknown_barcode1.fastq -w MB1_unknown_barcode2.fastq
+
+
+/gpfs1/home/ddeconin/sabre/sabre-master/sabre pe -f /gpfs1/home/ddeconin/Raw_data/MB2_FKDN240215899-1A_HCGLTDSXC_L3_R1.fq.gz -r /gpfs1/home/ddeconin/Raw_data/MB2_FKDN240215899-1A_HCGLTDSXC_L3_R2.fq.gz -b /gpfs1/home/ddeconin/MB2_barcodes.txt -u MB2_unknown_barcode1.fastq -w MB2_unknown_barcode2.fastq
+
+/gpfs1/home/ddeconin/sabre/sabre-master/sabre pe -f /gpfs1/home/ddeconin/Raw_data/MB3_FKDN240215900-1A_HCGLTDSXC_L3_R1.fq.gz -r /gpfs1/home/ddeconin/Raw_data/MB3_FKDN240215900-1A_HCGLTDSXC_L3_R2.fq.gz -b /gpfs1/home/ddeconin/MB3_barcodes.txt -u MB3_unknown_barcode1.fastq -w MB3_unknown_barcode2.fastq

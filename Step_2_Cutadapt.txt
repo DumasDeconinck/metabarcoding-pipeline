@@ -1,0 +1,61 @@
+salloc -p batch -t 1:00:00 --nodes=1 --ntasks-per-node=32 --cpus-per-task=4 --mem=440GB
+#!/bin/bash
+
+# Change to the 'Demultiplexed' directory
+cd ./Demultiplexed
+
+mkdir Trimmed
+mkdir Untrimmed
+
+
+# Loop through the V4- files
+for file in V4-*_R1.fastq; do
+    # Construct the filenames
+    forward_read=$file
+    reverse_read="${file/_R1.fastq/_R2.fastq}"
+    trimmed_forward="./Trimmed/trimmed-$forward_read"
+    trimmed_reverse="./Trimmed/trimmed-$reverse_read"
+    untrimmed_forward="./Untrimmed/untrimmed-$forward_read"
+    untrimmed_reverse="./Untrimmed/untrimmed-$reverse_read"
+
+    # Print the constructed filenames
+    echo "Forward read: $forward_read"
+    echo "Reverse read: $reverse_read"
+    echo "Trimmed forward: $trimmed_forward"
+    echo "Trimmed reverse: $trimmed_reverse"
+    echo "Untrimmed forward: $untrimmed_forward"
+    echo "Untrimmed reverse: $untrimmed_reverse"
+
+
+echo "all trimmed successfully"
+
+cutadapt --revcomp -g CCAGCASCYGCGGTAATTCC -G ACTTTCGTTCTTGATYRA -o"$trimmed_forward" -p "$trimmed_reverse" "$forward_read" "$reverse_read" --untrimmed-output="$untrimmed_forward" --untrimmed-paired-output="$untrimmed_reverse"
+
+done
+
+# Loop through the V9- files
+for file in V9-*_R1.fastq; do
+    # Construct the filenames
+    forward_read=$file
+    reverse_read="${file/_R1.fastq/_R2.fastq}"
+    trimmed_forward="./Trimmed/trimmed-$forward_read"
+    trimmed_reverse="./Trimmed/trimmed-$reverse_read"
+    untrimmed_forward="./Untrimmed/untrimmed-$forward_read"
+    untrimmed_reverse="./Untrimmed/untrimmed-$reverse_read"
+
+    # Print the constructed filenames
+    echo "Forward read: $forward_read"
+    echo "Reverse read: $reverse_read"
+    echo "Trimmed forward: $trimmed_forward"
+    echo "Trimmed reverse: $trimmed_reverse"
+    echo "Untrimmed forward: $untrimmed_forward"
+    echo "Untrimmed reverse: $untrimmed_reverse"
+
+
+echo "all trimmed successfully"
+
+cutadapt --revcomp -g CCCTGCCHTTTGTACACAC -G CCTTCYGCAGGTTCACCTAC -o"$trimmed_forward" -p "$trimmed_reverse" "$forward_read" "$reverse_read" --untrimmed-output="$untrimmed_forward" --untrimmed-paired-output="$untrimmed_reverse"
+
+done
+
+conda deactivate

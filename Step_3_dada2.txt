@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --partition=batch
+#SBATCH --nodes=1                # 1 computer nodes
+#SBATCH --ntasks-per-node=1      # 1 MPI tasks on EACH NODE
+#SBATCH --cpus-per-task=4        # 4 OpenMP threads on EACH MPI TASK
+#SBATCH --mem=440GB               # Request 440GB memory
+#SBATCH --time=3-00:00:00        # Time limit day-hrs:min:sec
+#SBATCH --mail-user=ddeconin@cityu.edu.hk  
+#SBATCH --mail-type=BEGIN,END,FAIL
+
+module load R/4.1.0
+R
+
+Rscript dada2_pipeline.R
