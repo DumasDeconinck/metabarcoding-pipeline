@@ -57,7 +57,7 @@ long_data <- long_data %>%
   left_join(HK_locations, by = c("Location" = "Sample"))
 
 #---Map
-ggmap::register_stadiamaps("9b87c6a6-dbdf-4f7e-8da6-92f2b28c72b0") #You have to create a stadia account and create 
+ggmap::register_stadiamaps("YOUR STADIA CODE") #You have to create a stadia account and create 
 
 x_min <- 113.78
 x_max <- 114.5101
